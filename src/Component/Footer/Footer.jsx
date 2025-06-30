@@ -19,10 +19,8 @@ const Footer = () => {
             deliver on time, every time.
           </p>
         </div>
-
         {/* Dotted Line */}
-        <div className="border-t border-dotted border-gray-600 mb-8"></div>
-
+        <div className="border-b-2 border-dotted border-gray-600 mb-8"></div>
         {/* Navigation Links */}
         <nav className="mb-12">
           <ul className="flex flex-wrap justify-center gap-8 text-gray-300">
@@ -76,7 +74,6 @@ const Footer = () => {
             </li>
           </ul>
         </nav>
-
         {/* Social Media Icons */}
         <div className="flex justify-center gap-4">
           <a

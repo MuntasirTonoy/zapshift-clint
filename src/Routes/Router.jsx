@@ -6,6 +6,8 @@ import Coverage from "../Pages/Coverage/Coverage";
 import About from "../Pages/About/About";
 import Pricing from "../Pages/Pricing/Pricing";
 import Services from "../Pages/Services/Services/Services";
+import LoginPage from "../Pages/Authentication/LoginPage";
+import RegisterPage from "../Pages/Authentication/RegisterPage";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
         Component: Pricing,
       },
     ],
+  },
+  {
+    path: "/sign-in",
+    Component: LoginPage,
+  },
+  {
+    path: "/register",
+    Component: RegisterPage,
   },
 ]);
 export default router;

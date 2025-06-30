@@ -51,7 +51,7 @@ const ReviewSlider = () => {
         </p>
       </div>
 
-      <div className="relative pb-16">
+      <div className="relative pb-20">
         <Swiper
           modules={[Navigation, Pagination]}
           spaceBetween={30}
@@ -65,7 +65,7 @@ const ReviewSlider = () => {
             el: ".swiper-pagination",
             clickable: true,
             renderBullet: (index, className) =>
-              `<span class="${className} w-2 h-2 rounded-full inline-block mx-1 bg-gray-300 cursor-pointer hover:bg-teal-400 transition-colors"></span>`,
+              `<span class="${className} w-3 h-3 rounded-full inline-block mx-1 bg-gray-300 cursor-pointer hover:bg-teal-400 transition-all duration-300 hover:scale-110"></span>`,
           }}
           loop={true}
           className="mb-8"
@@ -104,50 +104,77 @@ const ReviewSlider = () => {
           ))}
         </Swiper>
 
-        {/* Bottom Navigation */}
-        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-3">
-          {/* Previous Button */}
-          <button className="prev-btn w-10 h-10 bg-white border border-gray-300 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-50 transition-colors shadow-sm">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
+        {/* Optimized Bottom Navigation */}
+        <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+          <div className="flex items-center justify-center gap-4 bg-white/95 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-white/20">
+            {/* Previous Button */}
+            <button className="prev-btn group relative w-11 h-11 bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg">
+              <svg
+                className="w-5 h-5 text-gray-700 group-hover:text-gray-900 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              {/* Hover effect ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-gray-300/30 transition-colors duration-200"></div>
+            </button>
 
-          {/* Pagination Dots */}
-          <div className="swiper-pagination flex items-center gap-2 px-2"></div>
+            {/* Enhanced Pagination Dots */}
+            <div className="swiper-pagination flex items-center gap-2 px-3"></div>
 
-          {/* Next Button */}
-          <button className="next-btn w-10 h-10 bg-lime-400 text-white rounded-full flex items-center justify-center hover:bg-lime-500 transition-colors shadow-sm">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+            {/* Next Button */}
+            <button className="next-btn group relative w-11 h-11 bg-gradient-to-r from-lime-400 to-lime-500 hover:from-lime-500 hover:to-lime-600 rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg">
+              <svg
+                className="w-5 h-5 text-white group-hover:text-lime-50 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+              {/* Hover effect ring */}
+              <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-lime-300/40 transition-colors duration-200"></div>
+            </button>
+          </div>
         </div>
       </div>
 
       <style jsx>{`
-        .swiper-pagination-bullet-active {
+        .swiper-pagination-bullet {
+          width: 12px !important;
+          height: 12px !important;
+          background-color: #d1d5db !important;
+          opacity: 1 !important;
+          margin: 0 4px !important;
+          transition: all 0.3s ease !important;
+        }
+
+        .swiper-pagination-bullet:hover {
           background-color: #14b8a6 !important;
+          transform: scale(1.1) !important;
+        }
+
+        .swiper-pagination-bullet-active {
+          width: 32px !important;
+          border-radius: 12px !important;
+          background: linear-gradient(to right, #84cc16, #65a30d) !important;
+          transform: scale(1) !important;
+        }
+
+        .swiper-pagination-bullet-active:hover {
+          background: linear-gradient(to right, #65a30d, #4d7c0f) !important;
         }
       `}</style>
     </div>

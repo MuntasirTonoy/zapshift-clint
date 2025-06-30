@@ -37,7 +37,7 @@ const How = () => {
       {/* Dotted Border Container */}
       <div className="max-w-7xl  mx-auto  p-12">
         {/* Section Title */}
-        <h2 className="text-3xl font-extrabold text-gray-800 mb-8">
+        <h2 className="text-4xl font-extrabold text-gray-800 mb-8">
           How It Works
         </h2>
 

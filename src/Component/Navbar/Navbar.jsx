@@ -1,5 +1,6 @@
 import { FiArrowUpRight } from "react-icons/fi";
 import logo from "../../assets/img/logo.png";
+import { Link, NavLink } from "react-router";
 
 const Navbar = () => {
   const navItems = [
@@ -11,24 +12,29 @@ const Navbar = () => {
 
   return (
     <nav className="container mx-auto my-5 px-4 py-6 flex items-center justify-between bg-slate-100 rounded-2xl">
-      <div className="flex items-end gap-2">
+      <Link to="/" className="flex items-end gap-2">
         <img src={logo} alt="Profast Logo" className="w-8 h-full -mr-4" />
         <span className="text-2xl font-extrabold">ZapShift</span>
-      </div>
+      </Link>
 
       <div className="hidden md:flex items-center gap-8">
         {navItems.map((item) => (
-          <a key={item.name} href={item.path} className=" font-semibold">
+          <NavLink key={item.name} to={item.path} className=" font-semibold">
             {item.name}
-          </a>
+          </NavLink>
         ))}
       </div>
 
       <div className="hidden md:flex items-center lg:gap-4 gap-2">
-        <button className="btn btn-outline rounded-full">Sign In</button>
-        <button className="btn  rounded-full bg-lime-500 flex items-center gap-2 text-white ">
-          Be a rider{" "}
-        </button>{" "}
+        <Link to="/sign-in">
+          {" "}
+          <button className="btn btn-outline rounded-full">Sign In</button>{" "}
+        </Link>
+        <Link to="/be-a-rider">
+          <button className="btn  rounded-full bg-lime-500 flex items-center gap-2 text-white ">
+            Be a rider{" "}
+          </button>
+        </Link>
         <div className="bg-black rounded-full p-2 text-white text-2xl -ml-3">
           {" "}
           <FiArrowUpRight />
@@ -57,12 +63,18 @@ const Navbar = () => {
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-32 pl-4 shadow"
         >
           {navItems.map((item) => (
-            <li key={item.name} href={item.path} className="my-2">
-              {item.name}
+            <li key={item.name} className="my-2">
+              <NavLink to={item.path}>{item.name}</NavLink>
             </li>
           ))}
-          <li className="my-2">Be a Rider</li>
-          <li className="my-2">Sign in</li>
+          <li className="my-2">
+            {" "}
+            <NavLink to="/be-a-rider"> Be a Rider</NavLink>
+          </li>
+          <li className="my-2">
+            {" "}
+            <NavLink to="/signin"> Sign in</NavLink>
+          </li>
         </ul>
       </div>
     </nav>

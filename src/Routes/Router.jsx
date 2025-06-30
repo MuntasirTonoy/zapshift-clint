@@ -1,0 +1,43 @@
+import { createBrowserRouter } from "react-router";
+import Root from "../Pages/Root/Root";
+import Home from "../Pages/Home/Home";
+
+import Coverage from "../Pages/Coverage/Coverage";
+import About from "../Pages/About/About";
+import Pricing from "../Pages/Pricing/Pricing";
+import Services from "../Pages/Services/Services/Services";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Root,
+    errorElement: <div>Error loading page</div>,
+    children: [
+      {
+        index: true,
+        Component: Home,
+      },
+      {
+        path: "/home",
+        Component: Home,
+      },
+      {
+        path: "/services",
+        Component: Services,
+      },
+      {
+        path: "/coverage",
+        Component: Coverage,
+      },
+      {
+        path: "/about",
+        Component: About,
+      },
+      {
+        path: "/pricing",
+        Component: Pricing,
+      },
+    ],
+  },
+]);
+export default router;

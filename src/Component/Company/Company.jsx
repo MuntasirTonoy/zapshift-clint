@@ -47,7 +47,7 @@ const Company = () => {
   ];
 
   return (
-    <div data-aos="fade-up" className="w-full bg-gray-50 py-12">
+    <div className="w-full bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
@@ -58,9 +58,11 @@ const Company = () => {
 
         {/* Company Logos */}
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 lg:gap-16">
-          {companies.map((company) => (
+          {companies.map((company, index) => (
             <div
               key={company.id}
+              data-aos="fade-up"
+              data-aos-delay={index * 200}
               className="flex items-center justify-center h-12 min-w-32 opacity-70 hover:opacity-100 transition-opacity duration-300"
             >
               <img

@@ -28,10 +28,8 @@ const Benefit = () => {
       {benefits.map((item, index) => (
         <div
           key={index}
-          data-aos="fade-left"
-          data-aos-anchor="#example-anchor"
-          data-aos-offset="500"
-          data-aos-duration="500"
+          data-aos="fade-right"
+          data-aos-delay={index * 200}
           className="flex items-center gap-6 bg-gray-100 rounded-xl p-6 md:p-8 "
         >
           <img

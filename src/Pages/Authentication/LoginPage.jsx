@@ -38,7 +38,7 @@ const LoginPage = () => {
             <p className="text-gray-600">Login with ProFast</p>
           </div>
 
-          <div className="space-y-6">
+          <form className="space-y-5">
             {/* Email Field */}
             <div>
               <label
@@ -132,7 +132,7 @@ const LoginPage = () => {
               </svg>
               Sign in with google
             </button>
-          </div>
+          </form>
         </div>
       </div>
 

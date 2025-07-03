@@ -24,11 +24,11 @@ const Accordian = () => {
   ];
 
   return (
-    <div data-aos="fade-up" className="max-w-7xl mx-auto p-6 rounded-lg ">
+    <div data-aos="fade-up" className="max-w-7xl mx-auto p-6 rounded-lg my-20 ">
       <h1 className="md:text-5xl text-2xl text-teal-900 text-center  font-extrabold mb-4">
         Frequently Asked Questions
       </h1>
-      <p className="text-black/60 max-w-3xl mx-auto text-sm  md:text-lg text-center mb-8">
+      <p className="text-black/60 max-w-3xl mx-auto text-sm  md:text-lg text-center mb-8 md:mb-15">
         Enhance posture, mobility, and well-being effortlessly with Posture Pro.
         Achieve proper alignment, reduce pain, and strengthen your body with
         ease!

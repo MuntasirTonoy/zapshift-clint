@@ -47,6 +47,7 @@ const How = () => {
             <div
               key={index}
               data-aos="fade-up"
+              data-aos-delay={index * 200}
               className="bg-white rounded-lg p-8 text-left shadow-sm"
             >
               <ServiceIcon />

@@ -39,7 +39,7 @@ const RegisterPage = () => {
             <p className="text-gray-600">Register with ZapShift</p>
           </div>
 
-          <div className="space-y-6">
+          <form className="space-y-4">
             {/* name Field */}
             <div>
               <label
@@ -140,7 +140,7 @@ const RegisterPage = () => {
               </svg>
               Sign in with google
             </button>
-          </div>
+          </form>
         </div>
       </div>
 

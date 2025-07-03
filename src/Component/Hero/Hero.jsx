@@ -8,7 +8,10 @@ import Banner3 from "../../assets/img/banner/banner3.png";
 
 const Hero = () => {
   return (
-    <section data-aos="fade-up" className="container mx-auto px-4 mt-8">
+    <section
+      data-aos="fade-up"
+      className="container mx-auto px-4 my-5 md:min-h-screen"
+    >
       <Carousel
         autoPlay={true}
         infiniteLoop={true}

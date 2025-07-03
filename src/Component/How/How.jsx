@@ -46,6 +46,7 @@ const How = () => {
           {services.map((service, index) => (
             <div
               key={index}
+              data-aos="fade-up"
               className="bg-white rounded-lg p-8 text-left shadow-sm"
             >
               <ServiceIcon />

@@ -14,14 +14,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div data-aos="fade-up" className="min-h-screen bg-gray-50 flex">
       {/* Left side - Login Form */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-20 xl:px-32">
         {/* Header */}
         <div className="mb-8">
           <Link to="/">
             <div className="flex items-end mb-8">
-              <img src={logo} alt="site logo" className="-mr-3" />S
+              <img src={logo} alt="site logo" className="-mr-3" />
               <span className="text-xl font-extrabold text-gray-900">
                 ZapShift
               </span>
@@ -77,12 +77,12 @@ const LoginPage = () => {
 
             {/* Forgot Password */}
             <div className="text-left">
-              <a
-                href="#"
+              <Link
+                to={"/forget-password"}
                 className="text-gray-500 hover:text-gray-700 text-sm underline"
               >
                 Forget Password?
-              </a>
+              </Link>
             </div>
 
             {/* Login Button */}

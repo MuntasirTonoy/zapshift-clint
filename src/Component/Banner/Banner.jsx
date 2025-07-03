@@ -2,7 +2,10 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div className="relative w-full max-w-7xl mx-auto bg-teal-800 rounded-2xl overflow-hidden">
+    <div
+      data-aos="fade-up"
+      className="relative w-full max-w-7xl mx-auto bg-teal-800 rounded-2xl overflow-hidden"
+    >
       <div className="flex items-center justify-between p-8 md:p-12">
         {/* Left content */}
         <div className="flex-1 max-w-xl">

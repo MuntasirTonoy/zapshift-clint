@@ -47,7 +47,7 @@ const Company = () => {
   ];
 
   return (
-    <div className="w-full bg-gray-50 py-12">
+    <div data-aos="fade-up" className="w-full bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">

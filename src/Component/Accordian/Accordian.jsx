@@ -24,7 +24,7 @@ const Accordian = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-6 rounded-lg ">
+    <div data-aos="fade-up" className="max-w-7xl mx-auto p-6 rounded-lg ">
       <h1 className="md:text-5xl text-2xl text-teal-900 text-center  font-extrabold mb-4">
         Frequently Asked Questions
       </h1>

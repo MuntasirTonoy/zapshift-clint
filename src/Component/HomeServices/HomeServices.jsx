@@ -53,7 +53,10 @@ const HomeServices = () => {
   );
 
   return (
-    <section className="bg-teal-950 py-16 px-8 container my-10 mx-auto rounded-2xl">
+    <section
+      data-aos="fade-up"
+      className="bg-teal-950 py-16 px-8 container my-10 mx-auto rounded-2xl"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">

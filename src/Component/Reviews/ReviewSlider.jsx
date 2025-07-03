@@ -38,7 +38,7 @@ const testimonials = [
 
 const ReviewSlider = () => {
   return (
-    <div className="bg-gray-100 py-16 px-4">
+    <div data-aos="fade-up" className="bg-gray-100 py-16 px-4">
       <div className="max-w-4xl mx-auto text-center mb-12">
         <img src={imgIcon} alt="quote" className="mx-auto mb-4 h-full" />
         <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">

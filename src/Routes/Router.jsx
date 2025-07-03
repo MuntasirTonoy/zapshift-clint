@@ -8,6 +8,7 @@ import Pricing from "../Pages/Pricing/Pricing";
 import Services from "../Pages/Services/Services/Services";
 import LoginPage from "../Pages/Authentication/LoginPage";
 import RegisterPage from "../Pages/Authentication/RegisterPage";
+import ForgetPassword from "../Pages/ForgetPassword/ForgetPassword";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     Component: RegisterPage,
+  },
+  {
+    path: "/forget-password",
+    Component: ForgetPassword,
   },
 ]);
 export default router;

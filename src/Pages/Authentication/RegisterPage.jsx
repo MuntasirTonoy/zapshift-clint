@@ -15,7 +15,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div data-aos="fade-up" className="min-h-screen bg-gray-50 flex">
       {/* Left side - Registration Form */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:px-20 xl:px-32">
         {/* Header */}
@@ -145,7 +145,7 @@ const RegisterPage = () => {
       </div>
 
       {/* Right side - Illustration */}
-      <div className="hidden lg:flex flex-1  items-center justify-center relative overflow-hidden">
+      <div className="hidden lg:flex flex-1 bg-gradient-to-br from-lime-300 to-green-400 items-center justify-center relative overflow-hidden">
         <Lottie animationData={animationData} loop={true} />
       </div>
     </div>

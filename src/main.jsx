@@ -5,6 +5,7 @@ import router from "./Routes/Router";
 import { RouterProvider } from "react-router";
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
+import AuthProvider from "./Context/AuthContext/AuthContext";
 // ..
 AOS.init({
   offset: 120, // Offset (in px) from the original trigger point
@@ -17,6 +18,8 @@ AOS.init({
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

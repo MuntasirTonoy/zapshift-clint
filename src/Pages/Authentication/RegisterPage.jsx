@@ -1,19 +1,60 @@
-import React, { useState } from "react";
 import logo from "../../assets/img/logo.png"; // Adjust the path as necessary
 import Lottie from "lottie-react";
 import animationData from "../../assets/animations/register.json"; // Adjust the path as necessary
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const RegisterPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const { createUser, user, signInWithGoogle, updateUserProfile, loading } =
+    useContext(AuthContext);
 
-  const handleRegister = (e) => {
-    e.preventDefault();
-    // Handle registration logic here
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleRegister = async (data) => {
+    try {
+      await createUser(data.email, data.password);
+      updateUserProfile(data.name);
+
+      // Only runs if no errors
+    } catch (error) {
+      console.error("Handler error (optional):", error); // Extra logging if needed
+    } finally {
+      navigate("/sign-in");
+      console.log(user);
+      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Sign in Successfull",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
   };
-
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle(); // Calls the context method
+      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Sign in Successfull",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      // Only runs if no errors
+    } catch (error) {
+      console.error("Handler error (optional):", error); // Extra logging if needed
+    }
+  };
   return (
     <div data-aos="fade-up" className="min-h-screen bg-gray-50 flex">
       {/* Left side - Registration Form */}
@@ -39,7 +80,7 @@ const RegisterPage = () => {
             <p className="text-gray-600">Register with ZapShift</p>
           </div>
 
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit(handleRegister)} className="space-y-4">
             {/* name Field */}
             <div>
               <label
@@ -49,13 +90,34 @@ const RegisterPage = () => {
                 Name
               </label>
               <input
-                id="name"
+                {...register("name", {
+                  required: true,
+                  maxLength: 50,
+                  minLength: 3,
+                  pattern: /^[A-Za-z\s]+$/,
+                })}
                 type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
                 className="w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-transparent"
               />
+              {errors.name && errors.name.type === "required" && (
+                <p className="text-red-500 text-sm mt-1">Name is required</p>
+              )}
+              {errors.name && errors.name.type === "minLength" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Name must be at least 3 characters
+                </p>
+              )}
+              {errors.name && errors.name.type === "maxLength" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Name must be at most 50 characters
+                </p>
+              )}
+              {errors.name && errors.name.type === "pattern" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Name must only contain letters and spaces
+                </p>
+              )}
             </div>
             {/* Email Field */}
             <div>
@@ -66,17 +128,24 @@ const RegisterPage = () => {
                 Email
               </label>
               <input
-                id="email"
+                {...register("email", {
+                  required: true,
+                  pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                })}
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
                 className="w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-transparent"
               />
+              {errors.email && errors.email.type === "required" && (
+                <p className="text-red-500 text-sm mt-1">Email is required</p>
+              )}
+              {errors.email && errors.email.type === "pattern" && (
+                <p className="text-red-500 text-sm mt-1">Email is not valid</p>
+              )}
             </div>
 
             {/* Password Field */}
-            <div>
+            <div className="relative">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -84,18 +153,42 @@ const RegisterPage = () => {
                 Password
               </label>
               <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                })}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 className="w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-transparent"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-[42px] text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+              {errors.password && errors.password.type === "required" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Password is required
+                </p>
+              )}
+              {errors.password && errors.password.type === "minLength" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Password must be at least 6 characters
+                </p>
+              )}
+              {errors.password && errors.password.type === "pattern" && (
+                <p className="text-red-500 text-sm mt-1">
+                  Password must contain at least one letter and one number
+                </p>
+              )}
             </div>
 
             {/* Register Button */}
             <button
-              onClick={handleRegister}
+              type="submit"
               className="w-full bg-lime-400 hover:bg-lime-500 text-gray-900 font-semibold py-3 px-4 rounded-md transition-colors duration-200"
             >
               Register
@@ -117,6 +210,7 @@ const RegisterPage = () => {
 
             {/* Google Login */}
             <button
+              onClick={handleGoogleLogin}
               type="button"
               className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
             >

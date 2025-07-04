@@ -1,16 +1,39 @@
-import React, { useState } from "react";
-import logo from "../../assets/img/logo.png"; // Adjust the path as necessary
+import logo from "../../assets/img/logo.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "lottie-react";
-import animationData from "../../assets/animations/login.json"; // Adjust the path as necessary
-import { Link } from "react-router";
+import animationData from "../../assets/animations/login.json";
+import { Link, useNavigate } from "react-router";
+import { useContext, useState } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Handle login logic here
+  const { user, signInWithGoogle } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const handleLogin = (data) => {
+    console.log(data);
+  };
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle(); // Calls the context method
+      navigate("/");
+      Swal.fire({
+        icon: "success",
+        title: "Sign in Successfull",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      // Only runs if no errors
+    } catch (error) {
+      console.error("Handler error (optional):", error); // Extra logging if needed
+    }
   };
 
   return (
@@ -35,10 +58,10 @@ const LoginPage = () => {
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Welcome Back
             </h1>
-            <p className="text-gray-600">Login with ProFast</p>
+            <p className="text-gray-600">Login with Zapshift</p>
           </div>
 
-          <form className="space-y-5">
+          <form onSubmit={handleSubmit(handleLogin)} className="space-y-5">
             {/* Email Field */}
             <div>
               <label
@@ -48,17 +71,16 @@ const LoginPage = () => {
                 Email
               </label>
               <input
+                {...register("email", { required: true })}
                 id="email"
                 type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email"
                 className="w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-transparent"
               />
             </div>
 
             {/* Password Field */}
-            <div>
+            <div className="relative">
               <label
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
@@ -67,12 +89,18 @@ const LoginPage = () => {
               </label>
               <input
                 id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className="w-full px-3 py-3 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-transparent"
+                {...register("password", { required: "Password is required" })}
+                className="w-full px-3 py-3 pr-10 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-lime-400"
               />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-[42px] text-gray-500 hover:text-gray-700"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
 
             {/* Forgot Password */}
@@ -87,7 +115,7 @@ const LoginPage = () => {
 
             {/* Login Button */}
             <button
-              onClick={handleLogin}
+              type="submit"
               className="w-full bg-lime-400 hover:bg-lime-500 text-gray-900 font-semibold py-3 px-4 rounded-md transition-colors duration-200"
             >
               Login
@@ -109,6 +137,7 @@ const LoginPage = () => {
 
             {/* Google Login */}
             <button
+              onClick={handleGoogleLogin}
               type="button"
               className="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 rounded-md transition-colors duration-200 flex items-center justify-center"
             >

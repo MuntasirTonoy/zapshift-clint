@@ -1,8 +1,29 @@
 import { FiArrowUpRight } from "react-icons/fi";
 import logo from "../../assets/img/logo.png";
 import { Link, NavLink } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const handleLogout = async () => {
+    try {
+      await logOut(); // Calls the context method
+      Swal.fire({
+        icon: "success",
+        title: "Logout Successfull",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      // Only runs if no errors
+    } catch (error) {
+      console.error("Handler error (optional):", error); // Extra logging if needed
+    }
+  };
+
   const navItems = [
     { name: "Services", path: "/services" },
     { name: "Coverage", path: "/coverage" },
@@ -26,17 +47,33 @@ const Navbar = () => {
       </div>
 
       <div className="hidden md:flex items-center lg:gap-4 gap-2">
-        <Link to="/sign-in">
-          {" "}
-          <button className="btn btn-outline  rounded-full">
-            Sign In
-          </button>{" "}
-        </Link>
-        <Link to="/be-a-rider">
-          <button className="btn  rounded-full bg-lime-500 flex items-center gap-2 text-white ">
-            Be a rider{" "}
-          </button>
-        </Link>
+        {user ? (
+          <div className="flex gap-2">
+            <button
+              onClick={handleLogout}
+              className="btn btn-outline  rounded-full"
+            >
+              Logout
+            </button>{" "}
+            <button className="btn  rounded-full bg-lime-500 flex items-center gap-2 text-white ">
+              Dash Board
+            </button>
+          </div>
+        ) : (
+          <div className="flex gap-2">
+            <Link to="/sign-in">
+              {" "}
+              <button className="btn btn-outline  rounded-full">
+                Sign In
+              </button>{" "}
+            </Link>
+            <Link to="/be-a-rider">
+              <button className="btn  rounded-full bg-lime-500 flex items-center gap-2 text-white ">
+                Be a rider{" "}
+              </button>
+            </Link>
+          </div>
+        )}
         {/* Theme switcher */}
         <div className="bg-neutral rounded-full p-2 text-white ">
           {" "}
@@ -95,14 +132,22 @@ const Navbar = () => {
               <NavLink to={item.path}>{item.name}</NavLink>
             </li>
           ))}
-          <li className="my-2">
-            {" "}
-            <NavLink to="/be-a-rider"> Be a Rider</NavLink>
-          </li>
-          <li className="my-2">
-            {" "}
-            <NavLink to="/signin"> Sign in</NavLink>
-          </li>
+          {user ? (
+            <li onClick={handleLogout} className="my-2">
+              LogOut
+            </li>
+          ) : (
+            <>
+              <li className="my-2">
+                {" "}
+                <NavLink to="/be-a-rider"> Be a Rider</NavLink>
+              </li>
+              <li className="my-2">
+                {" "}
+                <NavLink to="/signin"> Sign in</NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

@@ -6,3 +6,21 @@
 * {
   font-family: "Urbanist", sans-serif;
 }
+/* Fade and scale side slides */
+.swiper-slide {
+  transition: all 0.3s ease;
+  opacity: 0.4;
+  transform: scale(0.9);
+}
+
+.swiper-slide-prev,
+.swiper-slide-next {
+  opacity: 0.3;
+  transform: scale(0.95);
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1) translateY(-40px);
+  z-index: 10;
+}

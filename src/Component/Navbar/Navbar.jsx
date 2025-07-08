@@ -4,10 +4,10 @@ import { Link, NavLink } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../Context/AuthContext/AuthContext";
 import Swal from "sweetalert2";
+import "../../index.css";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogout = async () => {
     try {
@@ -40,7 +40,11 @@ const Navbar = () => {
 
       <div className="hidden md:flex items-center gap-8">
         {navItems.map((item) => (
-          <NavLink key={item.name} to={item.path} className=" font-semibold">
+          <NavLink
+            key={item.name}
+            to={item.path}
+            className=" p-2 rounded-lg font-semibold"
+          >
             {item.name}
           </NavLink>
         ))}

@@ -104,7 +104,8 @@ const Footer = () => {
           >
             <BsYoutube className="w-6 h-6" />
           </a>
-        </div>
+        </div>{" "}
+        <h1 className="mt-10">All right reserved by Muntasir Tonoy </h1>
       </div>
     </footer>
   );

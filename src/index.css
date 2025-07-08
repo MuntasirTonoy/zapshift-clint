@@ -6,10 +6,16 @@
 * {
   font-family: "Urbanist", sans-serif;
 }
+.active {
+  background: #7bd50de0;
+  color: aliceblue;
+}
+
 /* Fade and scale side slides */
 .swiper-slide {
   transition: all 0.3s ease;
   opacity: 0.4;
+  border-radius: 10px;
   transform: scale(0.9);
 }
 
